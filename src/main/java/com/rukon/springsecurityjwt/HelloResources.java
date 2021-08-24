@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 public class HelloResources {
 
@@ -22,8 +24,8 @@ public class HelloResources {
 
     @RequestMapping({ "/hello" })
     public String hello(@RequestHeader("Authorization") String header) {
-       String user = jwtUtil.extractUsername(header.replace("Bearer ", ""));
-        System.out.println(user);
+       Date date = jwtUtil.extractExpiration(header.replace("Bearer ", ""));
+        System.out.println(date);
         return "{Hello World}";
     }
 
